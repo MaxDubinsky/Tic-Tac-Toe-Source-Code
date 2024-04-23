@@ -7,3 +7,5 @@ Also, wanted to say about very annoying thing in every program - **BUGS**. There
 - Bot is very easy.
 - Maybe adding some functional or interface as additional.
 
+# April, 23
+Added big labels in the end of the game.
