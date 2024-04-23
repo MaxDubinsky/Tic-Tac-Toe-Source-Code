@@ -1,12 +1,9 @@
-﻿/// ------------------
+/// ------------------
 /// TIC TAC Toe GAME.
 /// BY M4x.
 /// ------------------
 
 #include <iostream>
-#include <array>
-
-using namespace std;
 
 // CONSTANTS.
 #define LENGTH_OF_TABLE 3
@@ -31,9 +28,10 @@ enum GameResult {
 void getTable(char table[WIDTH_OF_TABLE][LENGTH_OF_TABLE]) {
 	for (int i = 0; i < WIDTH_OF_TABLE; i++) {
 		for (int j = 0; j < LENGTH_OF_TABLE; j++) {
-			cout << table[i][j] << "  ";
+			std::cout << table[i][j] << "    ";
 		}
-		cout << endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
 	}
 }
 
@@ -85,7 +83,7 @@ GameResult check_if_someone_win(char table[WIDTH_OF_TABLE][LENGTH_OF_TABLE], Gam
 	if (table[0][0] == enemy_ch && table[1][1] == enemy_ch && table[2][2] == enemy_ch) {
 		return GameResult::bot_win;
 	}
-	if (table[0][2] == ch && table[1][1] == ch && table[2][0] == ch) {
+	if (table[0][2] == enemy_ch && table[1][1] == enemy_ch && table[2][0] == ch) {
 		return GameResult::bot_win;
 	}
 
@@ -136,10 +134,10 @@ void opponent_makes_move(char table[WIDTH_OF_TABLE][LENGTH_OF_TABLE], GameVarian
 
 void gamevariant_saytype(GameVariant gamevariant) {
 	if (gamevariant == GameVariant::cross) {
-		cout << "You're cross." << endl;
+		std::cout << "You're cross." << std::endl;
 	}
 	if (gamevariant == GameVariant::circle) {
-		cout << "You're circle." << endl;
+		std::cout << "You're circle." << std::endl;
 	}
 	
 	if (gamevariant != GameVariant::cross && gamevariant != GameVariant::circle) {
@@ -170,7 +168,7 @@ bool tableIsFullWith(char table[WIDTH_OF_TABLE][LENGTH_OF_TABLE], char ch) {
 }
 
 GameVariant choosing_variant() {
-	int rand_num = random(1, 2);
+	int rand_num = random(1, 3);
 	switch (rand_num)
 	{
 	case 1:
@@ -192,24 +190,24 @@ int main() {
 	GameResult gameresult = nullres;
 	GameVariant gamevariant = choosing_variant();
 
-	gamevariant_saytype(gamevariant);
-
 	while (gameIsOver != true) {
 		int mesh;
 		int column;
 
+		system("cls");
+		gamevariant_saytype(gamevariant);
 		getTable(table);
 
-		cout << "Enter mesh: ";
-		cin >> mesh;
+		std::cout << "Enter mesh: ";
+		std::cin >> mesh;
 		if (mesh < 0 || mesh > 2) {
-			cout << "Wrong column, try again." << endl;
+			std::cout << "Wrong column, try again." << std::endl;
 		}
 		else {
-			cout << "Enter column: ";
-			cin >> column;
+			std::cout << "Enter column: ";
+			std::cin >> column;
 			if (column < 0 || column > 2) {
-				cout << "Wrong mesh, try again." << endl;
+				std::cout << "Wrong mesh, try again." << std::endl;
 			}
 			else {
 				if (isBoxEmpty(table, mesh, column)) {
@@ -239,7 +237,7 @@ int main() {
 					}
 				}
 				else {
-					cout << "This box (" << mesh << " mesh, " << column << " column) isn't empty." << endl;
+					std::cout << "This box (" << mesh << " mesh, " << column << " column) isn't empty." << std::endl;
 				}
 			}
 		}
@@ -252,16 +250,54 @@ int main() {
 
 	switch (gameresult) {
 		case GameResult::user_win:
-			cout << "You won!" << endl;
+			system("cls");
+			getTable(table);
+			std::cout << std::endl;
+			std::cout << std::endl;
+			std::cout << "|-|    |-|    |------|    |-|    |-|        |-|   |-|   |-|    |------|    |--|         |-|   |-|" << std::endl;
+			std::cout << "|-|    |-|    |-|  |-|    |-|    |-|        |-|   |-|   |-|    |-|  |-|    |-| |-|      |-|   |-|" << std::endl;
+			std::cout << "|-|    |-|    |-|  |-|    |-|    |-|        |-|   |-|   |-|    |-|  |-|    |-|  |-|     |-|   |-|" << std::endl;
+			std::cout << "|------|-|    |-|  |-|    |-|    |-|        |-|   |-|   |-|    |-|  |-|    |-|    |-|   |-|   |-|" << std::endl;
+			std::cout << "   |-|        |-|  |-|    |-|    |-|        |-|   |-|   |-|    |-|  |-|    |-|      |-| |-|   |-|" << std::endl;
+			std::cout << "   |-|        |-|  |-|    |-|    |-|        |-|   |-|   |-|    |-|  |-|    |-|       |-||-|      " << std::endl;
+			std::cout << "   |-|        |------|    |--------|        |-----|-|-----|    |------|    |-|         |--|   00" << std::endl;
+			std::cout << std::endl;
+			std::cout << std::endl;
+			std::cout << std::endl;
 			break;
 		case GameResult::bot_win:
-			cout << "Bot won!" << endl;
+			system("cls");
+			getTable(table);
+			std::cout << std::endl;
+			std::cout << std::endl;
+			std::cout << "|-------|    |------|    |-------|        |-|   |-|   |-|    |------|    |--|         |-|   |-|" << std::endl;
+			std::cout << "|-|   |-|    |-|  |-|       |-|           |-|   |-|   |-|    |-|  |-|    |-| |-|      |-|   |-| " << std::endl;
+			std::cout << "|-|   |-|	  |-|  |-|		 |-|		   |-|   |-|   |-|    |-|  |-|    |-|  |-|     |-|   |-| " << std::endl;
+			std::cout << "|-------|	  |-|  |-|	     |-|           |-|   |-|   |-|    |-|  |-|    |-|    |-|   |-|   |-|" << std::endl;
+			std::cout << "|-|   |-|	  |-|  |-|		 |-|           |-|   |-|   |-|    |-|  |-|    |-|      |-| |-|   |-|" << std::endl;
+			std::cout << "|-|   |-|	  |-|  |-|	     |-|           |-|   |-|   |-|    |-|  |-|    |-|       |-||-|      " << std::endl;
+			std::cout << "|-------|    |------|       |-|           |-----|-|-----|    |------|    |-|         |--|   00" << std::endl;
+			std::cout << std::endl;
+			std::cout << std::endl;
+			std::cout << std::endl;
 			break;
 		case GameResult::draw:
-			cout << "Draw!" << endl;
+			system("cls");
+			getTable(table);
+			std::cout << std::endl;
+			std::cout << std::endl;
+			std::cout << "|-----|     |-----|-|    |------|    |-|   |-|   |-|   " << std::endl;
+			std::cout << "|-|  |--|   |-|   |-|    |-|  |-|    |-|   |-|   |-|   " << std::endl;
+			std::cout << "|-|  |--|   |-------|    |-|  |-|    |-|   |-|   |-|   " << std::endl;
+			std::cout << "|-|  |--|   |-|\"\"      |------|    |-|   |-|   |-|   " << std::endl;
+			std::cout << "|-|  |--|   |-| \"\"     |-|  |-|    |-|   |-|   |-|" << std::endl;
+			std::cout << "|-----|     |-|  \"\"    |-|  |-|    |-----|-|-----|" << std::endl;
+			std::cout << std::endl;
+			std::cout << std::endl;
+			std::cout << std::endl;
 			break;
 		case GameResult::nullres:
-			cout << "Null." << endl;
+			std::cout << "Null." << std::endl;
 			break;
 	}
 
